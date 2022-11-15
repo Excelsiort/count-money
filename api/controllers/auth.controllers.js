@@ -11,13 +11,13 @@ const createToken = (id) => {
 
 module.exports.signUp = async(req, res) => {
     const {username, email, password} = req.body;
-
     try {
         const user = await UserModel.create({username, email, password})
         const token = createToken(user._id);
         res.cookie('jwt', token, { httponly: true, maxAge});
         res.cookie('username', username, { httponly: true, maxAge});
         res.status(200).json({ user: user._id })
+
     } catch(err) {
         const errors = signUpErrors(err);
         console.log(errors);
