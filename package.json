@@ -1,0 +1,19 @@
+{
+  "name": "count-money",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Excelsiort/count-money.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Excelsiort/count-money/issues"
+  },
+  "homepage": "https://github.com/Excelsiort/count-money#readme"
+}
