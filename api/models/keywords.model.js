@@ -1,25 +1,22 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
-
-const roleSchema = new Schema(
+const keywordsSchema = new Schema(
     {
-        description: {
+        keyword: {
             type: String,
             require: true,
-            minLength: 3,
-            maxLenght: 25,
+            minLength: 2,
+            maxLenght: 50,
             unique: true,
             trim: true
-        },
+        }
     },
     {
         timestamps: true,
     }
 );
 
-// play function before save into DB
+const KeywordsModel = model("Keywords", keywordsSchema);
 
-const UserModel = model("Role", roleSchema);
-
-module.exports = UserModel;
+module.exports = KeywordsModel;
