@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const UserModel = require('./user.model');
 const { Schema, model } = mongoose;
 
 
@@ -29,6 +30,16 @@ const userPreferencesSchema = new Schema(
         timestamps: true,
     }
 );
+
+userPreferencesSchema.statics.createWithUserAndPreference = async function (userId, theme, language) {
+    const user = await UserModel.findById(userId);
+    if (user) {
+        //a definir check sur theme et language
+        const userPreference = await this.create({ user: user, theme: theme, language: language });
+        return userPreference;
+    }
+    return null;
+};
 
 // play function before save into DB
 
