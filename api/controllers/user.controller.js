@@ -22,16 +22,8 @@ let UserController = {
     },
     getUserRoles: async (req, res) => {
         try {
-            let user = await UserModel.findById(req.params.id);
-            console.log("user",user);
-            let userroles = await UserRoleModel.find({user: user._id});
-            console.log("userroles",userroles);
-            let roles = [];
-            for (let i = 0; i < userroles.length; i++) {
-                let role = await RoleModel.findById(userroles[i].role);
-                roles.push(role.description);
-            }
-            res.status(200).json(roles);
+            let userRoles = await UserModel.getUserRoles(req.params.id);
+            res.status(200).json(userRoles);
         } catch (err) {
             res.status(500).json(err);
         }

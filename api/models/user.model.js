@@ -59,6 +59,17 @@ userSchema.statics.createWithRole = async function(body) {
     const userrole = await UserRoleModel.create({user: user._id, role: role_user._id});
     return user;
 }
+
+userSchema.statics.getUserRoles = async function(userId) {
+    const user = await this.findById(userId);
+    const userRoles = await UserRoleModel.find({user: user._id});
+    let roles = [];
+    for (let i = 0; i < userRoles.length; i++) {
+        let role = await RoleModel.findById(userRoles[i].role);
+        roles.push({roleId: role._id, description: role.description});
+    }
+    return roles;
+}
 //
 
 const UserModel = mongoose.model("User", userSchema);
