@@ -1,9 +1,11 @@
 const router = require('express').Router();
-const authController = require("../conrollers/auth.controllers");
+const authController = require("../controllers/auth.controllers");
+const userController = require("../controllers/user.controller");
 
 //auth
-router.post("/register", authController.signUp);
-router.post("/login", authController.signIn);
-router.get("/logout", authController.signOut);
+router.get("/:id", userController.getOne);
+router.get("/get-user-roles/:id", userController.getUserRoles);
+router.post("/add-user-roles/:id", userController.addUserRoles);
+router.post("/remove-user-roles/:id", userController.removeUserRoles);
 
 module.exports = router;

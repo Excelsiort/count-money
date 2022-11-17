@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const RoleModel = require('../models/role.model');
+const UserRoleModel = require('./userRole.model');
 const { isEmail } = require('validator');
 const bcrypt = require('bcrypt');
 
@@ -51,6 +53,14 @@ userSchema.statics.login = async function(email, password) {
     throw Error('incorrect email')
 };
 
-const UserModel = mongoose.model("user", userSchema);
+userSchema.statics.createWithRole = async function(body) {
+    const user = await this.create(body);
+    const role_user = await RoleModel.findOne({description: 'user'});
+    const userrole = await UserRoleModel.create({user: user._id, role: role_user._id});
+    return user;
+}
+//
+
+const UserModel = mongoose.model("User", userSchema);
 
 module.exports = UserModel;
