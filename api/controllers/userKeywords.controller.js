@@ -25,7 +25,7 @@ let UserKeywordsController = {
             res.status(500).json(err);
         }
     },
-    getAllByName: async (req, res) => {
+    getAllByKeyword: async (req, res) => {
         try {
             let userKeyword = await UserKeywordsModel.find({keyword: req.params.keyword});
             res.status(200).json(userKeyword);
@@ -48,5 +48,33 @@ let UserKeywordsController = {
         } catch (err) {
             res.status(500).json(err);
         }
+    },
+    deleteById: async (req, res) => {
+        try {
+            let userKeyword = await UserKeywordsModel.findByIdAndDelete(req.params.id);
+            res.status(200).json(userKeyword);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    deleteByName: async (req, res) => {
+        try {
+            let userKeyword = await UserKeywordsModel.findOne({keyword: req.params.keyword});
+            userKeyword = await UserKeywordsModel.findByIdAndDelete(userKeyword._id);
+            res.status(200).json(userKeyword);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    deleteAllFromUser: async (req, res) => {
+        try {
+            let userKeywords = await UserKeywordsModel.find({user: req.params.user});
+            userKeywords = await UserKeywordsModel.deleteMany({user: req.params.user});
+            res.status(200).json(userKeywords);
+        } catch (err) {
+            res.status(500).json(err);
+        }
     }
 }
+
+module.exports = UserKeywordsController;

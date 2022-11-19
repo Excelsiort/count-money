@@ -1,27 +1,62 @@
 const router = require('express').Router();
-const keywordsController = require("../controllers/keywords.controllers");
+const keywordsController = require("../controllers/keywords.controller");
 
 //controller routes
-router.get("/", keywordsController.getAll);
-router.get("/:id", keywordsController.getOne);
-router.get("/get-one-by-name/:name", keywordsController.getOneByName);
-/* post object example
-    {
-        "keyword": "test"
-    }
-*/
-router.post("/create", keywordsController.create);
-/* put object example with keyword id
-    {
-        "keyword": "test"
-    }
-*/
-router.put("/update-by-id/:id", keywordsController.updateById);
-/* put object example with keyword name
-    {
-        "keyword": "test"
-    }
-*/
-router.put("/update-by-name/:name", keywordsController.updateByName);
-router.delete("/delete/:id", keywordsController.deleteById);
-router.delete("/delete-by-name/:name", keywordsController.deleteByName);
+router.get("/", 
+    /*
+        #swagger.path = "/keywords/"
+        #swagger.summary = "Get all keywords"
+        #swagger.tags = ["Keywords"]
+    */
+    keywordsController.getAll
+);
+router.get("/:id", 
+    /*
+        #swagger.path = "/keywords/{id}"
+        #swagger.summary = "Get keyword by id"
+        #swagger.tags = ["Keywords"]
+    */
+    keywordsController.getOne
+);
+router.get("/get-one-by-name/:name", 
+    /*
+        #swagger.path = "/keywords/get-one-by-name/{name}"
+        #swagger.summary = "Get keyword by name"
+        #swagger.tags = ["Keywords"]
+    */
+    keywordsController.getOneByName
+);
+router.post("/create", 
+    /*
+        #swagger.path = "/keywords/create"
+        #swagger.summary = "Create a new keyword"
+        #swagger.tags = ["Keywords"]
+        #swagger.parameters['obj'] = {
+            in: 'body',
+            description: "Keyword to create",
+            required: true,
+            type: "object",
+            schema: { $keyword: "string"}
+        }
+    */
+    keywordsController.create
+);
+router.delete("/delete/:id", 
+    /*
+        #swagger.path = "/keywords/delete/{id}"
+        #swagger.summary = "Delete keyword by id"
+        #swagger.tags = ["Keywords"]
+    */
+    keywordsController.deleteById
+);
+router.delete("/delete-by-name/:name", 
+    /*
+        #swagger.path = "/keywords/delete-by-name/{name}"
+        #swagger.summary = "Delete keyword by name"
+        #swagger.tags = ["Keywords"]
+    */
+
+    keywordsController.deleteByName
+);
+
+module.exports = router;

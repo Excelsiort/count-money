@@ -1,5 +1,5 @@
 const PopularCryptoModel = require('../models/popularCrypto.model');
-
+const CryptoCoinsModel = require('../models/cryptoCoins.model');
 let PopularCryptoController = {
     getAll: async (req, res) => {
         try {
@@ -11,7 +11,8 @@ let PopularCryptoController = {
     },
     create: async (req, res) => {
         try {
-            let popularCrypto = await PopularCryptoModel.create(req.body);
+            let crypto = await CryptoCoinsModel.findOne({cryptoId: req.params.cryptoId});
+            let popularCrypto = await PopularCryptoModel.create(crypto);
             res.status(200).json(popularCrypto);
         } catch (err) {
             res.status(500).json(err);
@@ -19,10 +20,13 @@ let PopularCryptoController = {
     },
     delete: async (req, res) => {
         try {
-            let popularCrypto = await PopularCryptoModel.findByIdAndDelete(req.params.id);
+            let crypto = await CryptoCoinsModel.findOne({cryptoId: req.params.cryptoId});
+            let popularCrypto = await PopularCryptoModel.findByIdAndDelete(crypto._id);
             res.status(200).json(popularCrypto);
         } catch (err) {
             res.status(500).json(err);
         }
     }
 }
+
+module.exports = PopularCryptoController;

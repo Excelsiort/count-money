@@ -42,3 +42,5 @@ let UserPreferencesController = {
         }
     }
 }
+
+module.exports = UserPreferencesController;

@@ -59,3 +59,5 @@ let KeywordsController = {
         }
     },
 } 
+
+module.exports = KeywordsController;
