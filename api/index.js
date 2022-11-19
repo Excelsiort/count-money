@@ -74,3 +74,6 @@ app.use('/api/popular-crypto/', popularCryptoRoutes);
 
 //server
 app.listen(process.env.PORT, () => console.log('serveur started :' + process.env.PORT));
+
+const open = require('open');
+open("http://localhost:" + process.env.PORT + "/api-docs");
