@@ -27,7 +27,7 @@ let UserPreferencesController = {
     },
     createWithUserAndPreference: async (req, res) => {
         try {
-            let userPreference = await UserPreferencesModel.createWithUserAndPreference({userId: req.params.userId, preferenceId: req.params.preferenceId});
+            let userPreference = await UserPreferencesModel.createWithUserAndPreference({userId: req.params.userId, theme: req.params.theme, language: req.params.language});
             res.status(200).json(userPreference);
         } catch (err) {
             res.status(500).json(err);
@@ -35,10 +35,12 @@ let UserPreferencesController = {
     },
     update: async (req, res) => {
         try {
-            let userPreference = await UserPreferencesModel.findByIdAndUpdate(req.params.id, {preference:req.params.preference})
+            let userPreference = await UserPreferencesModel.findByIdAndUpdate(req.params.id, {preference: req.params.preference})
             res.status(200).json(userPreference)
         } catch (err) {
             res.status(500).json(err);
         }
     }
 }
+
+module.exports = UserPreferencesController;

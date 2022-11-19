@@ -44,12 +44,22 @@ let UserCryptoListController = {
             res.status(500).json(err);
         }
     },
-    delete: async (req, res) => {
+    deleteById: async (req, res) => {
         try {
             let userCrypto = await UserCryptoListModel.findByIdAndDelete(req.params.id);
             res.status(200).json(userCrypto);
         } catch (err) {
             res.status(500).json(err);
         }
+    },
+    deleteByName: async (req, res) => {
+        try {
+            let userCrypto = await UserCryptoListModel.findOneAndDelete({crypto: req.params.crypto});
+            res.status(200).json(userCrypto);
+        } catch (err) {
+            res.status(500).json(err);
+        }
     }
 }
+
+module.exports = UserCryptoListController;

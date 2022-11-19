@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon index.js"
   },
+  "nodemonConfig": {"ignore": ["*swagger.json"]},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Excelsiort/count-money.git"
@@ -26,6 +27,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.2",
     "nodemon": "^2.0.20",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.6.0",
     "validator": "^13.7.0"
   }
 }

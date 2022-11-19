@@ -60,3 +60,5 @@ let CryptoCoinsController = {
         }
     }
 }
+
+module.exports = CryptoCoinsController;
