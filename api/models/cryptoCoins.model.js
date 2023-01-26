@@ -6,18 +6,48 @@ const cryptoCoinsSchema = new Schema(
         name: {
             type: String,
             require: true,
-            minLength: 2,
             maxLenght: 50,
-            unique: true,
+            unique: false,
             trim: true
         },
         symbol: {
             type: String,
             require: true,
-            minLength: 2,
             maxLenght: 50,
             unique: true,
             trim: true
+        },
+        logoUrl: {
+            type: String,
+            require: false,
+            maxLenght: 500,
+            unique: true,
+            trim: true
+        },
+        marketCap: {
+            type: Number,
+            require: false,
+            maxLenght: 40,
+            unique: false,
+            trim: true
+        },
+        totalSupply: {
+            type: Number,
+            require: false,
+            maxLenght: 40,
+            unique: false,
+            trim: true
+        },
+        circulatingSupply: {
+            type: Number,
+            require: false,
+            maxLenght: 40,
+            unique: false,
+            trim: true
+        },
+        isPopular: {
+            type: Boolean,
+            require: false,
         },
     },
     {

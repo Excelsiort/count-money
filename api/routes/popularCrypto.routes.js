@@ -26,13 +26,22 @@ router.post("/create",
     */
     popularCryptoController.create
 );
-router.delete("/delete-by-id/:cryptoId",
+router.delete("/delete-by-id/:id",
     /*
-        #swagger.path = "/popular-crypto/delete-by-id/{cryptoId}"
+        #swagger.path = "/popular-crypto/delete-by-id/{popularCryptoId}"
         #swagger.summary = "Delete a popular crypto by cryptoId"
         #swagger.tags = ["Popular Crypto"]
     */
     popularCryptoController.delete
+);
+
+router.get("/get-popular-trading-pairs",
+    /*
+        #swagger.path = "/popular-crypto/get-popular-trading-pairs"
+        #swagger.summary = "Get all popular trading pairs"
+        #swagger.tags = ["Popular Crypto"]
+    */
+    popularCryptoController.getPopularTradingPairs
 );
 
 module.exports = router;

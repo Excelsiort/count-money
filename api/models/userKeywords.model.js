@@ -20,9 +20,9 @@ const userKeywordsSchema = new Schema(
     }
 );
 
-userKeywordsSchema.statics.createWithUserAndKeyword = async function (userId, keywordId) {
-    let user = await UserModel.findById(userId);
-    let keyword = await KeywordsModel.findById(keywordId);
+userKeywordsSchema.statics.createWithUserAndKeyword = async function (data) {
+    let user = await UserModel.findById(data.userId);
+    let keyword = await KeywordsModel.findById(data.keywordId);
     if (user && keyword) {
         let userKeyword = await this.create({ user: user, keyword: keyword });
         return userKeyword;

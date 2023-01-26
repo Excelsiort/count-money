@@ -20,6 +20,6 @@ const roleSchema = new Schema(
 
 // play function before save into DB
 
-const UserModel = model("Role", roleSchema);
+const RoleModel = model("Role", roleSchema);
 
-module.exports = UserModel;
+module.exports = RoleModel;

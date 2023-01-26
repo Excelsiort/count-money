@@ -19,9 +19,9 @@ const userCryptoListSchema = new Schema(
     }
 );
 
-userCryptoListSchema.statics.createWithUserAndCrypto = async function (userId, cryptoId) {
-    let user = await UserModel.findById(userId);
-    let crypto = await CryptoCoinsModel.findById(cryptoId);
+userCryptoListSchema.statics.createWithUserAndCrypto = async function (params) {
+    let user = await UserModel.findById(params.userId);
+    let crypto = await CryptoCoinsModel.findById(params.cryptoId);
     if (user && crypto) {
         let userCrypto = await this.create({ user: user, crypto: crypto });
         return userCrypto;

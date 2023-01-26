@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const RoleModel = require("../models/role.model");
-require('dotenv').config({path: '../config/.env'});
 
 mongoose.connect(
     process.env.ATLAS_URI + process.env.DB_NAME,

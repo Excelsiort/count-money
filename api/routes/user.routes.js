@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const UserController = require('../controllers/user.controller');
 const userController = require("../controllers/user.controller");
 
 //#swagger.tags = ['Users']
@@ -20,6 +21,10 @@ router.get("/:id",
     userController.getOne
 );
 
+router.get("/count/:id",
+    userController.getUserConfigCount
+);
+
 router.get("/get-user-roles/:id",
     /*
         #swagger.path = "/user/get-user-roles/{id}"
@@ -28,6 +33,11 @@ router.get("/get-user-roles/:id",
     */
     userController.getUserRoles
 );
+
+router.post("/count/:id",
+    UserController.updateConfigCount
+);
+
 router.post("/add-user-roles/:id", 
     /*
         #swagger.path = "/user/add-user-roles/{id}"

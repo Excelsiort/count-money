@@ -26,7 +26,7 @@ router.get("/get-all-from-user/:id",
     */
     userCryptoListController.getAllFromUser
 );
-router.post("/add-crypto-to-user/",
+router.post("/:userId/:cryptoId",
     /*
         #swagger.path = "/user-crypto-list/add-crypto-to-user/"
         #swagger.summary = "Add crypto to user crypto list"

@@ -8,7 +8,8 @@
   "host": "localhost:8080/api",
   "basePath": "/",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
     "/auth/register": {
@@ -52,8 +53,8 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
+          "201": {
+            "description": "Created"
           }
         }
       }
@@ -94,8 +95,8 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
+          "201": {
+            "description": "Created"
           }
         }
       }
@@ -865,6 +866,24 @@
         }
       }
     },
+    "/crypto-coins/update-crypto-details": {
+      "get": {
+        "tags": [
+          "Crypto Coins"
+        ],
+        "summary": "Update crypto details",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/crypto-coins/": {
       "get": {
         "tags": [
@@ -872,7 +891,36 @@
         ],
         "summary": "Get all crypto coins",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort type (marketCap, totalSupply, circulatingSupply)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Sort by ascending or descending",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1096,6 +1144,67 @@
         }
       }
     },
+    "/crypto-coins/toggle-popular/{id}": {
+      "post": {
+        "tags": [
+          "Crypto Coins"
+        ],
+        "summary": "Toggle popular crypto coin by id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Toggle popular coin ",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isPopular": {
+                  "type": "string",
+                  "example": "boolean"
+                }
+              },
+              "required": [
+                "isPopular"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/crypto-coins/update-cryptocoins-with-crypto-details": {
+      "post": {
+        "tags": [
+          "Crypto Coins"
+        ],
+        "summary": "Update crypto market circulating",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/popular-crypto/": {
       "get": {
         "tags": [
@@ -1151,7 +1260,7 @@
         }
       }
     },
-    "/popular-crypto/delete-by-id/{cryptoId}": {
+    "/popular-crypto/delete-by-id/{popularCryptoId}": {
       "delete": {
         "tags": [
           "Popular Crypto"
@@ -1160,12 +1269,42 @@
         "description": "",
         "parameters": [
           {
-            "name": "cryptoId",
+            "name": "popularCryptoId",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "popularCryptoId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/popular-crypto/get-popular-trading-pairs": {
+      "get": {
+        "tags": [
+          "Popular Crypto"
+        ],
+        "summary": "Get all popular trading pairs",
+        "description": "",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"

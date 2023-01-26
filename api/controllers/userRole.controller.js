@@ -1,4 +1,5 @@
 const UserRoleModel = require('../models/userRole.model');
+const RoleModel = require('../models/role.model')
 
 let UserRoleController = {
     getAll: async (req, res) => {
@@ -19,9 +20,11 @@ let UserRoleController = {
     },
     getOneByUserId: async (req, res) => {
         try {
-            let userrole = await UserRoleModel.findOne({userId: req.params.userId});
-            res.status(200).json(userrole);
+            let userrole = await UserRoleModel.find({user: req.params.id})
+            const role = await RoleModel.findById(userrole[0].role)
+            res.status(200).json(role);
         } catch (err) {
+            console.log(err)
             res.status(500).json(err);
         }
     },
@@ -58,3 +61,5 @@ let UserRoleController = {
         }
     },
 }
+
+module.exports = UserRoleController;

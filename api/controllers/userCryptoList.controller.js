@@ -1,5 +1,6 @@
 const UserCryptoListModel = require('../models/userCryptoList.model');
 const UserModel = require('../models/user.model');
+const CryptoCoinsModel = require('../models/cryptoCoins.model');
 
 
 let UserCryptoListController = {
@@ -13,9 +14,14 @@ let UserCryptoListController = {
     },
     getAllFromUser: async (req, res) => {
         try {
-            let user = await UserModel.findById(req.params.userId);
+            let tab = []
+            let user = await UserModel.findById(req.params.id);
             let userCryptoList = await UserCryptoListModel.find({user: user});
-            res.status(200).json(userCryptoList);
+            for (let i=0; i < userCryptoList.length; i++) {
+                let crypto = await CryptoCoinsModel.findById(userCryptoList[i].crypto.toString())
+                tab.push(crypto)
+            }
+            res.status(200).json(tab);
         } catch (err) {
             res.status(500).json(err);
         }
@@ -33,6 +39,7 @@ let UserCryptoListController = {
             let userCrypto = await UserCryptoListModel.createWithUserAndCrypto({userId: req.params.userId, cryptoId: req.params.cryptoId});
             res.status(200).json(userCrypto);
         } catch (err) {
+            console.log(err)
             res.status(500).json(err);
         }
     },
@@ -46,7 +53,8 @@ let UserCryptoListController = {
     },
     deleteById: async (req, res) => {
         try {
-            let userCrypto = await UserCryptoListModel.findByIdAndDelete(req.params.id);
+            const crypto = await CryptoCoinsModel.findById(req.params.id)
+            let userCrypto = await UserCryptoListModel.findOneAndDelete({crypto: crypto._id});
             res.status(200).json(userCrypto);
         } catch (err) {
             res.status(500).json(err);

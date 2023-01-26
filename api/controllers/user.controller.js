@@ -5,6 +5,7 @@ const UserRoleModel = require('../models/userRole.model');
 
 let UserController = {
     getAll: async (req, res) => {
+        console.log(process.env.WEBSITE_HOSTNAME)
         try {
             let users = await UserModel.find();
             res.status(200).json(users);
@@ -26,6 +27,16 @@ let UserController = {
             res.status(200).json(userRoles);
         } catch (err) {
             res.status(500).json(err);
+        }
+    },
+    getUserConfigCount: async (req, res) => {
+        try {
+            const user = await UserModel.findById(req.params.id)
+            if (!user.configCount) res.status(200).json(10)
+            else res.status(200).json(user.configCount) 
+        } catch(err) {
+            console.log(err)
+            res.status(500).json(err)
         }
     },
     addUserRoles: async (req, res) => {
@@ -77,6 +88,14 @@ let UserController = {
         try {
             let user = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
             res.status(200).json(user);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    updateConfigCount: async (req, res) => {
+        try {
+            let configCount = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            res.status(200).json(configCount);
         } catch (err) {
             res.status(500).json(err);
         }

@@ -8,7 +8,7 @@ const keywordsSchema = new Schema(
             require: true,
             minLength: 2,
             maxLenght: 50,
-            unique: true,
+            unique: false,
             trim: true
         }
     },

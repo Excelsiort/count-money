@@ -5,7 +5,8 @@ const popularCryptoSchema = new Schema(
     {
         cryptoCoin: {
             type: Schema.Types.ObjectId,
-            ref: "CryptoCoins"
+            ref: "CryptoCoins",
+            unique: true,
         },
     },
     {
@@ -16,7 +17,7 @@ const popularCryptoSchema = new Schema(
 popularCryptoSchema.statics.createWithCrypto = async function (cryptoId) {
     let crypto = await CryptoCoinsModel.findById(cryptoId);
     if (crypto) {
-        let popularCrypto = await this.create({ crypto: crypto });
+        let popularCrypto = await this.create({ cryptoCoin: crypto });
         return popularCrypto;
     }
     return null;

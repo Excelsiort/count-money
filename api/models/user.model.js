@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema(
             require: true,
             max: 1024,
             minLength: 6,
+        },
+        configCount: {
+            type: Number,
+            default: 10,
         }
     },
     {

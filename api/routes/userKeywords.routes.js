@@ -26,7 +26,7 @@ router.get("/get-all-by-keyword/:id",
     */
     userKeywordsController.getAllByKeyword
 );
-router.post("/add-user-keyword/", 
+router.post("/add-user-keyword/:userId/:keywordId", 
     /*
         #swagger.path = "/user-keywords/add-user-keyword/"
         #swagger.summary = "Add a new user keyword"
